@@ -23,7 +23,7 @@ public class UserController extends Controller<User> {
         if (user.getName().isBlank()) {
             user.setName(user.getLogin());
         }
-        user.setId(generateId());
+        user.setId(super.generateId());
         log.info("Создан новый пользователь");
         return super.post(user);
     }
