@@ -10,6 +10,7 @@ import java.time.LocalDate;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode (of = "id")
 @Builder
 public class Film {
 

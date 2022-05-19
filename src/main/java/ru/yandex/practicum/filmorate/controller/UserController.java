@@ -37,6 +37,10 @@ public class UserController extends Controller<User> {
         if (user.getName().isBlank()) {
             user.setName(user.getLogin());
         }
+        if (user.getId() <= 0) {
+            log.warn("Неверный ID пользователя");
+            throw new ValidationException("Неверный ID пользователя");
+        }
         log.info("Информация о пользователе обновлена");
         return super.update(user);
     }

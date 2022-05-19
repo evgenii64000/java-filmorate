@@ -33,6 +33,10 @@ public class FilmController extends Controller<Film> {
             log.warn("Релиз фильма раньше 28.12.1895");
             throw new ValidationException("Дата релиза должна быть не раньше 28 декабря 1895");
         }
+        if (film.getId() <= 0) {
+            log.warn("Неверный ID фильма");
+            throw new ValidationException("Неверный ID фильма");
+        }
         log.info("Фильм обновлён");
         return super.update(film);
     }
