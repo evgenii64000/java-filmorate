@@ -12,16 +12,9 @@ import java.util.HashSet;
 @RestController
 @RequestMapping("/films")
 @Slf4j
-public class FilmController {
+public class FilmController extends Controller<Film> {
 
-    private final HashSet<Film> films = new HashSet<Film>();
-    private long idCounter = 0;
-
-    private long generateId() {
-        idCounter++;
-        return idCounter;
-    }
-
+    @Override
     @PostMapping
     public Film post(@RequestBody @Valid Film film) {
         if (film.getReleaseDate().isBefore(LocalDate.of(1895, 12, 28))) {
@@ -29,25 +22,23 @@ public class FilmController {
             throw new ValidationException("Дата релиза должна быть не раньше 28 декабря 1895");
         }
         film.setId(generateId());
-        films.add(film);
         log.info("Добавлен фильм");
-        return film;
+        return super.post(film);
     }
 
+    @Override
     @PutMapping
     public Film update(@RequestBody @Valid Film film) {
         if (film.getReleaseDate().isBefore(LocalDate.of(1895, 12, 28))) {
             log.warn("Релиз фильма раньше 28.12.1895");
             throw new ValidationException("Дата релиза должна быть не раньше 28 декабря 1895");
         }
-        films.remove(film);
         log.info("Фильм обновлён");
-        films.add(film);
-        return film;
+        return super.update(film);
     }
 
     @GetMapping
     public HashSet<Film> films() {
-        return films;
+        return super.returnList();
     }
 }
