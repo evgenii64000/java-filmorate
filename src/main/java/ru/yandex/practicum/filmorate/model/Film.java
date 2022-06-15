@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.validation.constraints.*;
 import java.time.LocalDate;
+import java.util.HashSet;
 
 @Getter
 @Setter
@@ -24,4 +25,6 @@ public class Film {
     private LocalDate releaseDate;
     @Positive
     private Long duration;
+    private Long likeCount = 0L;
+    private HashSet<Long> userLike = new HashSet<>();
 }
