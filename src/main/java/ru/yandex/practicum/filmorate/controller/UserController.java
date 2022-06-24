@@ -25,22 +25,22 @@ public class UserController extends Controller<User> {
     @Override
     @PostMapping
     public User post(@RequestBody @Valid User user) {
-        return userService.userStorage.create(user);
+        return userService.create(user);
     }
 
     @PutMapping
     public User update(@RequestBody @Valid User user) {
-        return userService.userStorage.update(user);
+        return userService.update(user);
     }
 
     @GetMapping
     public HashSet<User> users() {
-        return userService.userStorage.getUsers();
+        return userService.getUsers();
     }
 
     @GetMapping("/{id}")
     public User getUser(@PathVariable Long id) {
-        return userService.userStorage.getUserById(id);
+        return userService.getUserById(id);
     }
 
     @GetMapping("/{id}/friends")

@@ -25,18 +25,18 @@ public class FilmController extends Controller<Film> {
     @Override
     @PostMapping
     public Film post(@RequestBody @Valid Film film) {
-        return filmService.filmStorage.create(film);
+        return filmService.create(film);
     }
 
     @Override
     @PutMapping
     public Film update(@RequestBody @Valid Film film) {
-        return filmService.filmStorage.update(film);
+        return filmService.update(film);
     }
 
     @GetMapping
     public HashSet<Film> films() {
-        return filmService.filmStorage.getFilms();
+        return filmService.getFilms();
     }
 
     @GetMapping("/popular")
@@ -58,6 +58,6 @@ public class FilmController extends Controller<Film> {
 
     @GetMapping("/{id}")
     public void getFilmById(@PathVariable Long id) {
-        filmService.filmStorage.getFilmById(id);
+        filmService.getFilmById(id);
     }
 }
